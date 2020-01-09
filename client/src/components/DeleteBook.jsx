@@ -13,8 +13,6 @@ export default function DeleteBook(props) {
   const [deleteBook] = useMutation(DELETE_BOOK)
   const {id} = props
 
-  console.log(id) 
-
   const del = e => {
     e.preventDefault()
     deleteBook({ 
