@@ -1,6 +1,5 @@
-import React,{useState, useEffect} from "react";
-import { gql } from "apollo-boost";
-import { useQuery, useSubscription } from "@apollo/react-hooks";
+import React,{ useState, useEffect } from "react";
+import { gql, useQuery, useSubscription } from "@apollo/client";
 
 import DeleteBook from './DeleteBook'
 import EditBook from './EditBook'
@@ -45,17 +44,9 @@ export default function Books(){
     { onSubscriptionData: ({subscriptionData}) => {
       const addData = subscriptionData.data.subscribeBook
       setBooksData([...booksData, addData])
-
-      // const result = newBooksData.find(element.id === subscriptionData.data.subscribeBook.id)
-      // if(!result){
-      //   newBooksData.push(subscriptionData.data.subscribeBook)
-      //   setBooksData[newBooksData]
-      // } else {
-      //   result = 
-      //   setBooksData[newBooksData]
-      // }
     }}
   )
+
   useEffect(() => {
     if(data){
       setBooksData(data.books)
@@ -67,9 +58,9 @@ export default function Books(){
     return <p>Error</p>;
   }
 
-  return booksData.reverse().map(({ id, title, author }, index) => (
+  return booksData.map(({ id, title, author }, index) => (
     <div key={id}>
-      {/* <h3>book{index + 1}</h3> */}
+      <h3>book:{index + 1}</h3>
       <div>title:{title} <br/>author:{author}</div>
       <DeleteBook id={id}/>
       <EditBook id={id}/>

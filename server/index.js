@@ -34,11 +34,6 @@ let books = [
     id: "2",
     title: "初めてのGraph QL",
     author: "Eve Porcello"
-  },
-  {
-    id: "3",
-    title: "テスト",
-    author: "テス"
   }
 ];
 

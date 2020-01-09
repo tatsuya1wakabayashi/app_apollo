@@ -1,11 +1,13 @@
 import React from "react";
-import { ApolloClient } from "apollo-client";
-import { ApolloProvider } from "@apollo/react-hooks";
-import { split } from "apollo-link";
-import { HttpLink } from "apollo-link-http";
+import {
+  ApolloClient,
+  ApolloProvider,
+  split,
+  HttpLink,
+  getMainDefinition,
+  InMemoryCache
+} from "@apollo/client";
 import { WebSocketLink } from "apollo-link-ws";
-import { getMainDefinition } from "apollo-utilities";
-import { InMemoryCache } from "apollo-cache-inmemory";
 
 import AddBook from "./components/AddBook";
 import ReadBooks from "./components/ReadBooks";

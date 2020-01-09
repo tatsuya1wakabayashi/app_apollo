@@ -1,6 +1,5 @@
 import React from 'react'
-import { gql } from "apollo-boost";
-import { useMutation } from "@apollo/react-hooks";
+import { gql, useMutation } from "@apollo/client";
 
 const DELETE_BOOK = gql`
   mutation DeleteBook($id: ID) {

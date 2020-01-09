@@ -1,6 +1,5 @@
-import React,{useState} from 'react'
-import { gql } from "apollo-boost";
-import { useMutation } from "@apollo/react-hooks";
+import React,{ useState } from 'react'
+import { gql, useMutation } from "@apollo/client";
 
 const EDIT_BOOK = gql`
   mutation EditBook($id: ID, $title: String, $author: String) {
