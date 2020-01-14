@@ -4,38 +4,37 @@ import { gql, useQuery, useSubscription } from "@apollo/client";
 import DeleteBook from './DeleteBook'
 import EditBook from './EditBook'
 
+const BOOKS_QUERY = gql`
+{
+  books {
+    id
+    title
+    author
+  }
+}
+`;
+
+// const booksQuery2 = gql`
+//   {
+//     book(title: "Harry Potter") {
+//       title
+//       author
+//     }
+//   }
+// `;
+
+const BOOKS_SUBSCRIPTION = gql`
+subscription {
+  subscribeBook {
+    id
+    title
+    author
+  }
+}
+`
 
 export default function Books(){
   const [booksData, setBooksData] = useState([])
-
-  const BOOKS_QUERY = gql`
-    {
-      books {
-        id
-        title
-        author
-      }
-    }
-  `;
-
-  // const booksQuery2 = gql`
-  //   {
-  //     book(title: "Harry Potter") {
-  //       title
-  //       author
-  //     }
-  //   }
-  // `;
-
-  const BOOKS_SUBSCRIPTION = gql`
-    subscription {
-      subscribeBook {
-        id
-        title
-        author
-      }
-    }
-  `
 
   const { loading, error, data } = useQuery(BOOKS_QUERY);
 

@@ -1,5 +1,5 @@
 import React,{ useState } from 'react'
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useSubscription } from "@apollo/client";
 
 const EDIT_BOOK = gql`
   mutation EditBook($id: ID, $title: String, $author: String) {
@@ -10,6 +10,15 @@ const EDIT_BOOK = gql`
     }
   }
 ` 
+const EDIT_BOOK_SUBSCRIPTION = gql`
+subscription {
+  subscribeBook {
+    id
+    title
+    author
+  }
+}
+`
 
 export default function EditBook(props) {
   const [title, setTitle] = useState('')
@@ -18,6 +27,14 @@ export default function EditBook(props) {
   const {id} = props
 
   const [editBook] = useMutation(EDIT_BOOK)
+
+  useSubscription(
+    EDIT_BOOK_SUBSCRIPTION,
+    { onSubscriptionData: ({subscriptionData}) => {
+      const editData = subscriptionData.data.subscribeEditBook
+      console.log(editData)
+    }}
+  )
 
   const onSubmit = e => {
     e.preventDefault();

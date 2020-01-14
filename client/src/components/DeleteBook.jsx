@@ -11,7 +11,7 @@ const DELETE_BOOK = gql`
 
 export default function DeleteBook(props) {
   const [deleteBook] = useMutation(DELETE_BOOK)
-  const {id} = props
+  const { id } = props
 
   const del = e => {
     e.preventDefault()

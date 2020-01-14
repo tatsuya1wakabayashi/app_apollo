@@ -21,6 +21,7 @@ const typeDefs = gql`
 
   type Subscription {
     subscribeBook: Book
+    subscribeEditBook: Book
   }
 `;
 
@@ -56,19 +57,28 @@ const resolvers = {
           author: args.author
         }
       });
+      return books;
     },
     editBook: (root, args) => {
-      const editTarget = books.find(book => book.id === args.id);
+      let editTarget = books.find(book => book.id === args.id);
       editTarget.title = args.title;
       editTarget.author = args.author;
+      pubsub.publish("EDIT_BOOK", {
+        subscribeEditBook: {}
+      });
+      return editTarget;
     },
     deleteBook: (root, args) => {
       books = books.filter(book => book.id !== args.id);
+      return books;
     }
   },
   Subscription: {
     subscribeBook: {
       subscribe: () => pubsub.asyncIterator(["ADD_BOOK"])
+    },
+    subscribeEditBook: {
+      subscribe: () => pubsub.asyncIterator(["EDIT_BOOK"])
     }
   }
 };
